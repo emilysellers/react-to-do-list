@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext.js';
 import { signOut } from '../../services/auth.js';
 import './Header.css';
@@ -18,6 +19,12 @@ export default function Header() {
 
   return (
     <div className="header">
+      {!user && (
+        <div>
+          <Link to="/auth/sign-in">Sign in</Link>
+          <Link to="/auth/sign-up">Sign up</Link>
+        </div>
+      )}
       {user && (
         <>
           <div>Hello {user.email}</div>
