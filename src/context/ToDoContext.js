@@ -3,10 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const ToDoContext = createContext();
 
 const ToDoProvider = ({ children }) => {
-  const [tasks, setTasks] = useState([
-    { id: 1, description: 'laundry', isComplete: false },
-    { id: 2, description: 'groceries', isComplete: false },
-  ]);
+  const [tasks, setTasks] = useState([]);
   return <ToDoContext.Provider value={{ tasks, setTasks }}>{children}</ToDoContext.Provider>;
 };
 
