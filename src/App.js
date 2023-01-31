@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header/Header.js';
 import Auth from './components/Auth/Auth.js';
-import ToDos from './components/ToDos/ToDos.js';
+import ToDoList from './components/ToDos/ToDoList.js';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { useUser } from './context/UserContext.js';
 
@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/auth/:type" component={Auth} />
-        <Route path="/todos" component={ToDos} />
+        <Route path="/todos" component={ToDoList} />
         <Route exact path="/">
           <>
             {user && <Redirect to="/items" />}

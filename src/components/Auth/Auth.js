@@ -31,7 +31,7 @@ export default function Auth() {
   return (
     <div className="auth">
       <div className="form-container">
-        <p>To Dos Sign In</p>
+        <p>Welcome! Please sign in or sign up.</p>
         <div>
           <NavLink to="/auth/sign-in">Sign in</NavLink>
           <NavLink to="/auth/sign-up">Sign up</NavLink>
