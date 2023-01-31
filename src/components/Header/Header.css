@@ -1,6 +1,9 @@
 .header {
   background-color: rgb(148, 177, 177);
   padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 h1 {

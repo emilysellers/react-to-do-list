@@ -18,3 +18,7 @@ export async function authUser(email, password, type) {
   return response.user;
 }
 //authUser is called in Auth.js
+
+export async function signOut() {
+  await client.auth.signOut();
+}
