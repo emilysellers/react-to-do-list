@@ -18,7 +18,7 @@ const ToDoProvider = ({ children }) => {
       }
     };
     fetchItems();
-  }, [user]);
+  }, [user, tasks]);
 
   return <ToDoContext.Provider value={{ tasks, setTasks }}>{children}</ToDoContext.Provider>;
 };
