@@ -6,10 +6,12 @@ const ToDoContext = createContext();
 
 const ToDoProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
+  const [complete, setComplete] = useState(false);
+  const [deleteTask, setDeleteTask] = useState(false);
   const { user } = useUser();
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchToDos = async () => {
       try {
         const data = await getToDos();
         setTasks(data);
@@ -17,10 +19,16 @@ const ToDoProvider = ({ children }) => {
         console.error(e.message);
       }
     };
-    fetchItems();
-  }, [user, tasks]);
+    fetchToDos();
+  }, [user, complete, deleteTask]);
 
-  return <ToDoContext.Provider value={{ tasks, setTasks }}>{children}</ToDoContext.Provider>;
+  return (
+    <ToDoContext.Provider
+      value={{ tasks, setTasks, complete, setComplete, deleteTask, setDeleteTask }}
+    >
+      {children}
+    </ToDoContext.Provider>
+  );
 };
 
 const useToDos = () => {

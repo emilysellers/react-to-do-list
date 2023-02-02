@@ -2,17 +2,29 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useToDos } from '../../context/ToDoContext.js';
 import { useUser } from '../../context/UserContext.js';
-import { toggleComplete } from '../../services/todos.js';
+import { deleteToDo, toggleComplete } from '../../services/todos.js';
 import ToDoForm from './ToDoForm.js';
 import './ToDos.css';
 
 export default function ToDoList() {
   const { user } = useUser();
-  const { tasks, setTasks } = useToDos();
+  const { tasks, setTasks, complete, setComplete, deleteTask, setDeleteTask } = useToDos();
+
   const handleCheck = async (task) => {
     try {
-      const completedTask = await toggleComplete(task);
-      setTasks((currentTask) => (currentTask.id === task.id ? completedTask : currentTask));
+      const updatedTask = await toggleComplete(task);
+      setTasks((currentTask) => (currentTask.id === task.id ? updatedTask : currentTask));
+      setComplete(!complete);
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
+
+  const handleDelete = async (task) => {
+    try {
+      const deletedTask = await deleteToDo(task);
+      setTasks((currentTask) => (currentTask.id === task.id ? deletedTask : currentTask));
+      setDeleteTask(!deleteTask);
     } catch (e) {
       console.error(e.message);
     }
@@ -28,9 +40,10 @@ export default function ToDoList() {
       <ToDoForm />
       <ul>
         {tasks.map((task) => (
-          <div key={task.id} {...{ task }}>
+          <div key={task.id}>
             <input type="checkbox" checked={task.complete} onChange={() => handleCheck(task)} />
             {task.description}
+            <button onClick={() => handleDelete(task)}>delete</button>
           </div>
         ))}
       </ul>

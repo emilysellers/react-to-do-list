@@ -18,3 +18,8 @@ export async function toggleComplete({ id, complete }) {
     .single();
   return checkError(response);
 }
+
+export async function deleteToDo(id) {
+  const response = await client.from('todos').delete().match(id).single();
+  return checkError(response);
+}
