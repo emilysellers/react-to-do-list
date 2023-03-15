@@ -36,9 +36,9 @@ export default function ToDoList() {
 
   return (
     <div className="to-dos">
-      <h2>To Do List</h2>
+      <h2>Get stuff done!</h2>
       <ToDoForm />
-      <ul>
+      <div className="task-list">
         {tasks.map((task) => (
           <div key={task.id}>
             <input type="checkbox" checked={task.complete} onChange={() => handleCheck(task)} />
@@ -46,7 +46,7 @@ export default function ToDoList() {
             <button onClick={() => handleDelete(task)}>delete</button>
           </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
