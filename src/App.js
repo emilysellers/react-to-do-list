@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header/Header.js';
+import Auth from './components/Auth/Auth.js';
+import ToDoList from './components/ToDos/ToDoList.js';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { useUser } from './context/UserContext.js';
 
 function App() {
+  const { user } = useUser();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/auth/:type" component={Auth} />
+        <Route path="/todos" component={ToDoList} />
+        <Route exact path="/">
+          <>
+            {user && <Redirect to="/items" />}
+            {!user && <Redirect to="/auth/sign-in" />}
+          </>
+        </Route>
+      </Switch>
     </div>
   );
 }
